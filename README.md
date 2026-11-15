@@ -1,3 +1,23 @@
+<!-- research-security-notice:start -->
+## 研究用 fork：安全与安装提示
+
+核查日期：2026-11-15（Asia/Singapore）。本节由 fork 维护者补充。
+
+### 安装时自动执行的行为
+
+preinstall 在缺少 Bun 的 npm 安装场景下可能改写 node_modules 内启动器的 shebang；运行时会转交已找到的 Bun，或输出安装提示。已只读核对 bin/without-bun.cjs。提示中的远程安装命令需单独审阅其来源和内容后再使用。
+
+清单记录：
+
+```text
+preinstall: node bin/without-bun.cjs || exit 0
+```
+
+以上为安装行为与权限提示，恶意性判断需要进一步证据。核对版本：`482056625f7a4169d694bc28efcc887dd34a57d6`。来源：[package.json](https://github.com/gloom-sh/gloomberb/blob/482056625f7a4169d694bc28efcc887dd34a57d6/package.json)、[bin/without-bun.cjs](https://github.com/gloom-sh/gloomberb/blob/482056625f7a4169d694bc28efcc887dd34a57d6/bin/without-bun.cjs)。
+
+运行前先完成拟执行版本的全部源码、直接与传递依赖及下载来源的安全调查和扫描。本次仅核对上述公告或文件，完整审查状态为待完成。
+<!-- research-security-notice:end -->
+
 <div align="center">
 
 <img src="src/assets/gloomberb-logo.svg" alt="Gloom logo" width="76" />
